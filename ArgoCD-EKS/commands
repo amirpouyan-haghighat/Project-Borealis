@@ -1,0 +1,16 @@
+aws eks update-kubeconfig --region eu-west-2 --name my-eks-cluster --kubeconfig ./kubeconfig
+
+helm repo add argo https://argoproj.github.io/argo-helm
+helm dep update .
+helm install my-argocd-eks argocd-eks-helm
+kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+"user admin"
+helm upgrade my-argocd-eks argocd-eks-helm
+helm uninstall my-argocd-eks
+
+kubectl port-forward service/my-argocd-eks-server 7070:80
+
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout argocd.key -out argocd.crt -subj "/CN=argocd.example.com/O=argocd"
+aws acm import-certificate --certificate fileb://argocd.crt --private-key fileb://argocd.key
+

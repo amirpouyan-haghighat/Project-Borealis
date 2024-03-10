@@ -1,0 +1,8 @@
+apiVersion: v2
+name: argocd-eks
+description: A Helm chart for Kubernetes
+version: 0.1.0
+dependencies:
+  - name: argo-cd
+    version: "6.6.0" # Use just the version number here
+    repository: "@argo" # Use the repo alias defined during helm repo add

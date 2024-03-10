@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kuard-application-set
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/amirpouyan-haghighat/Borealis.git
+        revision: HEAD
+        directories:
+          - path: kuard
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/amirpouyan-haghighat/Borealis.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: default
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        retry:
+          limit: -1
+          backoff:
+            duration: 5s
+            factor: 1
+            maxDuration: 5s
