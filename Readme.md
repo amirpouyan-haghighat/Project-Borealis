@@ -59,4 +59,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 # Support
 
-For questions or support, please open an issue in the GitHub issue tracker. You can also contact us directly via email at [pooyanapooyan@gmail.com](pooyanapooyan@gmail.com).
+For questions or support, please open an issue in the GitHub issue tracker. You can also contact us directly.
